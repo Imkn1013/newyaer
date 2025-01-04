@@ -91,6 +91,8 @@
   <h1 id="big3rd" class="big3rd"></h1>
   <h1 id="big4th" class="big4th"></h1>
     </div>
+  <div id="joke">
+  </div>
   <h1 id="message" class="message">
 ＿人人人人人人人人人人人人人人人人＿<br>
 ＞　！！！！　あけおめ　！！！！　＜<br>
@@ -240,6 +242,10 @@
           const resalt=`タイム:${elapsedTime}秒`;
           document.getElementById("time").innerHTML=resalt;
         }
+        if(year[0] === 4 && year[1] === 5 && year[2] === 4 && year[3] === 5){
+          document.getElementById("joke").innerHTML="知ってた。絶対やると思った。";
+        }
+        
       });
     });
     
