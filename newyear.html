@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .big1st{
+      position:fixed;
+      top:0px;
+      left:0px;
+    }
+    .big2nd{
+      position:fixed;
+      top:0px;
+      left:150px;
+    }
+    .big3rd{
+      position:fixed;
+      top:0px;
+      left:300px;
+    }
+    .big4th{
+      position:fixed;
+      top:0px;
+      left:450px;
+    }
+    .up1st{
+      position:fixed;
+      top:12px;
+      left:50px;
+    }
+    .up2nd{
+      position:fixed;
+      top:12px;
+      left:200px;
+    }
+    .up3rd{
+      position:fixed;
+      top:12px;
+      left:350px;
+    }
+    .up4th{
+      position:fixed;
+      top:12px;
+      left:500px;
+    }
+    .down1st{
+      position:fixed;
+      top:300px;
+      left:50px;
+    }
+    .down2nd{
+      position:fixed;
+      top:300px;
+      left:200px;
+    }
+    .down3rd{
+      position:fixed;
+      top:300px;
+      left:350px;
+    }
+    .down4th{
+      position:fixed;
+      top:300px;
+      left:500px;
+    }
+    .message{
+      position:fixed;
+      top:325px;
+    }
+    .time{
+      position:fixed;
+      top:-10px;
+    }
+  </style>
+</head>
+<body>
+  <div id=buttons class=buttons>
+  <button id="up1st" class="up1st">▲</button>
+  <button id="up2nd" class="up2nd">▲</button>
+  <button id="up3rd" class="up3rd">▲</button>
+  <button id="up4th" class="up4th">▲</button>
+  <button id="down1st" class="down1st">▼</button>
+  <button id="down2nd" class="down2nd">▼</button>
+  <button id="down3rd" class="down3rd">▼</button>
+  <button id="down4th" class="down4th">▼</button>
+    </div>
+  <div id=numbers>
+  <h1 id="big1st" class="big1st"></h1>
+  <h1 id="big2nd" class="big2nd"></h1>
+  <h1 id="big3rd" class="big3rd"></h1>
+  <h1 id="big4th" class="big4th"></h1>
+    </div>
+  <h1 id="message" class="message">
+＿人人人人人人人人人人人人人人人人＿<br>
+＞　！！！！　あけおめ　！！！！　＜<br>
+￣Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y￣
+  </h1>
+  <h2 id="time" class="time"></h2>
+
+  <script>
+    const startTime = new Date();
+    document.getElementById("message").style.display="none";
+    // オーディオコンテキストを作成
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    // 音を鳴らす関数
+    const ring = (frequencies, delay, duration) => {
+      frequencies.forEach( function(frequency,index){
+        // 新しいオシレーターを作成
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        // オシレーターの設定
+        oscillator.type = 'square';
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+
+        // 音量の設定
+        if(index==1){
+        gainNode.gain.setValueAtTime(1, audioContext.currentTime);
+        }else{
+          gainNode.gain.setValueAtTime(0.6, audioContext.currentTime);
+        }
+
+        // 接続
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        // 音を鳴らす
+        oscillator.start(audioContext.currentTime + delay / 1000); // 遅延時間（ms → s）
+        oscillator.stop(audioContext.currentTime + (delay + duration) / 1000); // 停止時間
+      });
+    };
+    const speed=130;
+    
+    const big0=`┏━━┓<br>┃┏┓┃<br>┃┃┃┃<br>┃┃┃┃<br>┃┗┛┃<br>┗━━┛`;
+    const big1=`┏━┓　<br>┗┓┃　<br>　┃┃　<br>　┃┃　<br>┏┛┗┓<br>┗━━┛`;
+    const big2=`┏━━┓<br>┗━┓┃<br>┏━┛┃<br>┃┏━┛<br>┃┗━┓<br>┗━━┛`;
+    const big3=`┏━━┓<br>┗━┓┃<br>┏━┛┃<br>┗━┓┃<br>┏━┛┃<br>┗━━┛`;
+    const big4=`┏┓┏┓<br>┃┃┃┃<br>┃┗┛┃<br>┗━┓┃<br>　　┃┃<br>　　┗┛`;
+    const big5=`┏━━┓<br>┃┏━┛<br>┃┗━┓<br>┗━┓┃<br>┏━┛┃<br>┗━━┛`;
+    const big6=`┏━━┓<br>┃┏━┛<br>┃┗━┓<br>┃┏┓┃<br>┃┗┛┃<br>┗━━┛`;
+    const big7=`┏━━┓<br>┗━┓┃<br>　　┃┃<br>　　┃┃<br>　　┃┃<br>　　┗┛`;
+    const big8=`┏━━┓<br>┃┏┓┃<br>┃┗┛┃<br>┃┏┓┃<br>┃┗┛┃<br>┗━━┛`;
+    const big9=`┏━━┓<br>┃┏┓┃<br>┃┗┛┃<br>┗━┓┃<br>┏━┛┃<br>┗━━┛`;
+    
+    const year=[2,0,2,4];
+    
+    const translations = {
+  "0": big0,
+  "1": big1,
+  "2": big2,
+  "3": big3,
+  "4": big4,
+  "5": big5,
+  "6": big6,
+  "7": big7,
+  "8": big8,
+  "9": big9,
+};
+
+    
+   const trans = function(word) {
+    return translations[word] || "unknown";
+   };
+    
+    const draw=function(){
+    document.getElementById("big1st").innerHTML=trans(String(year[0]));
+    document.getElementById("big2nd").innerHTML=trans(String(year[1]));
+    document.getElementById("big3rd").innerHTML=trans(String(year[2]));
+    document.getElementById("big4th").innerHTML=trans(String(year[3]));
+    };
+    
+    draw();
+    
+    const apeer=function(){
+      
+      if(document.getElementById("big1st").style.color=="red"){
+      document.getElementById("big1st").style.color="black";
+      }else{
+      document.getElementById("big1st").style.color="red";
+      }
+      if(document.getElementById("big2nd").style.color=="red"){
+      document.getElementById("big2nd").style.color="black";
+      }else{
+      document.getElementById("big2nd").style.color="red";
+      }
+      if(document.getElementById("big3rd").style.color=="red"){
+      document.getElementById("big3rd").style.color="black";
+      }else{
+      document.getElementById("big3rd").style.color="red";
+      }
+      if(document.getElementById("big4th").style.color=="red"){
+      document.getElementById("big4th").style.color="black";
+      }else{
+      document.getElementById("big4th").style.color="red";
+      }
+      if(document.getElementById("message").style.color=="red"){
+      document.getElementById("message").style.color="black";
+      }else{
+      document.getElementById("message").style.color="red";
+      }
+    };
+    
+    document.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', (event) => {
+        const buttonId = event.target.id;  
+        
+        if (buttonId === 'up1st') {
+          year[0]=(year[0]+1)%10;
+        } else if (buttonId === 'up2nd') {
+          year[1]=(year[1]+1)%10;
+        } else if (buttonId === 'up3rd') {
+          year[2]=(year[2]+1)%10;
+        } else if (buttonId === 'up4th') {
+          year[3]=(year[3]+1)%10;
+        } else if (buttonId === 'down1st') {
+          year[0]=(year[0]+9)%10;
+        } else if (buttonId === 'down2nd') {
+          year[1]=(year[1]+9)%10;
+        } else if (buttonId === 'down3rd') {
+          year[2]=(year[2]+9)%10;
+        } else if (buttonId === 'down4th') {
+          year[3]=(year[3]+9)%10;
+        }
+        draw();
+        if(year[0] === 2 && year[1] === 0 && year[2] === 2 && year[3] === 5){
+          ring([523.25, 349.23], 0*speed, 1*speed);   // ド(523.25Hz), ファ(349.23Hz)
+          ring([493.88, 349.23], 1*speed, 1*speed); // シ(493.88Hz), ファ(349.23Hz)
+          ring([466.16, 349.23], 2*speed, 1*speed); // シ♭(466.16Hz), ファ(349.23Hz)
+          ring([440, 349.23], 3*speed, 1*speed);    // ラ(440Hz), ファ(349.23Hz)
+          ring([392, 311.13], 5*speed, 1*speed);   // ソ(392Hz), ミ♭(311.13Hz)
+          ring([466.16, 392], 7*speed, 1*speed);   // シ♭(466.16Hz), ソ(392Hz)
+          ring([440, 349.23], 9*speed, 5*speed);   // ラ(440Hz), ファ(349.23Hz)
+          document.getElementById("buttons").style.display="none";
+          document.getElementById("message").style.display="inline";
+          setInterval(apeer,100);
+          const endTime = new Date();
+          const elapsedTime = (endTime - startTime)/1000;
+          const resalt=`タイム:${elapsedTime}秒`;
+          document.getElementById("time").innerHTML=resalt;
+        }
+      });
+    });
+    
+    
+    
+  </script>
+</body>
+</html>
